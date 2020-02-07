@@ -1,10 +1,5 @@
 package com.example.Blockchain;
 
-import java.util.ArrayList;
-
-import com.example.Blockchain.DTOs.Block;
-import com.google.gson.GsonBuilder;
-
 
 public class Blockchain {
 
