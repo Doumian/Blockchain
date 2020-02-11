@@ -76,6 +76,8 @@ public class StringUtils {
         return new String(new char[difficulty]).replace('\0', '0');
     }
 
+
+
     public static String getStringFromKey(Key key) {
         return Base64.getEncoder().encodeToString(key.getEncoded());
     }

@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface BlockChainService {
-    BlockEntity generateNewBlock(String data, String hash);
+    BlockEntity generateNewBlock(String hash);
 }
