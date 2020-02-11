@@ -1,7 +1,9 @@
 package com.example.Blockchain.Entities.Transactions;
 
+import com.example.Blockchain.Entities.BlockChainEntity;
 import com.example.Blockchain.Services.Impl.BlockChainServiceImpl;
 import com.example.Blockchain.Utils.StringUtils;
+import org.springframework.cglib.core.Block;
 
 import java.security.*;
 import java.util.ArrayList;
@@ -47,11 +49,11 @@ public class TransactionEntity {
 
         //gather transaction inputs (Make sure they are unspent):
         for(TransactionInputEntity i : inputs) {
-            i.UTXO = BlockChainServiceImpl.UTXOs.get(i.transactionOutputId);
+            i.UTXO = BlockChainEntity.UTXOs.get(i.transactionOutputId);
         }
 
         //check if transaction is valid:
-        if(getInputsValue() < BlockChainServiceImpl.minimumTransaction) {
+        if(getInputsValue() < BlockChainEntity.minimumTransaction) {
             System.out.println("#Transaction Inputs to small: " + getInputsValue());
             return false;
         }
@@ -64,13 +66,13 @@ public class TransactionEntity {
 
         //add outputs to Unspent list
         for(TransactionOutputEntity o : outputs) {
-            BlockChainServiceImpl.UTXOs.put(o.id , o);
+            BlockChainEntity.UTXOs.put(o.id , o);
         }
 
         //remove transaction inputs from UTXO lists as spent:
         for(TransactionInputEntity i : inputs) {
             if(i.UTXO == null) continue; //if Transaction can't be found skip it
-            BlockChainServiceImpl.UTXOs.remove(i.UTXO.id);
+            BlockChainEntity.UTXOs.remove(i.UTXO.id);
         }
 
         return true;

@@ -5,6 +5,8 @@ import com.example.Blockchain.Services.BlockChainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/blockchain")
 public
@@ -17,6 +19,16 @@ class BlockchainController {
     public BlockEntity
      generateNewBlock(@RequestParam String hash){
         return this.blockChainService.generateNewBlock(hash);
+    }
+
+    @GetMapping(value = "/size")
+    public Integer getBlockchainSize(){
+        return this.blockChainService.getBlockchainSize();
+    }
+
+    @GetMapping(value = "/fullChainData")
+    public ArrayList<BlockEntity> getFullChainData(){
+        return this.blockChainService.getFullChainData();
     }
 
 
