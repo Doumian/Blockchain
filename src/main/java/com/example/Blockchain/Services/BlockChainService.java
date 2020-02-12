@@ -12,4 +12,6 @@ public interface BlockChainService {
     Integer getBlockchainSize();
 
     ArrayList<BlockEntity> getFullChainData();
+
+    BlockEntity getBlockData(Integer position);
 }

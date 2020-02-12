@@ -4,6 +4,7 @@ import com.example.Blockchain.Entities.Transactions.TransactionEntity;
 import com.example.Blockchain.Entities.Transactions.TransactionInputEntity;
 import com.example.Blockchain.Entities.Transactions.TransactionOutputEntity;
 
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,8 +15,8 @@ public class BlockChainEntity {
 
     public static int difficulty = 3;
     public static float minimumTransaction = 0.1f;
-    //public static WalletEntity walletA;
-    //public static WalletEntity walletB;
+    public static WalletEntity walletA;
+    public static WalletEntity walletB;
     public static TransactionEntity genesisTransaction;
 
     public static Boolean isChainValid() {
@@ -96,8 +97,18 @@ public class BlockChainEntity {
         return true;
     }
 
-    public static void createFirstBlock(){
-        BlockEntity firstBlockEntity = new BlockEntity("0");
-        blockchain.add(firstBlockEntity);
+    public static void createGenesisBlock(){
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider()); //Setup Bouncey castle as a Security Provider
+        walletA = new WalletEntity();
+        walletB = new WalletEntity();
+        BlockEntity genesisBlock = new BlockEntity("0");
+        WalletEntity coinbase = new WalletEntity();
+        genesisTransaction = new TransactionEntity(coinbase.publicKey, walletA.publicKey, 100f, null);
+        genesisTransaction.generateSignature(coinbase.privateKey);	 //manually sign the genesis transaction
+        genesisTransaction.transactionId = "0"; //manually set the transaction id
+        genesisTransaction.outputs.add(new TransactionOutputEntity(genesisTransaction.reciepient, genesisTransaction.value, genesisTransaction.transactionId)); //manually add the Transactions Output
+        UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0)); //its important to store our first transaction in the UTXOs list.
+        genesisBlock.addTransaction(genesisTransaction);
+        blockchain.add(genesisBlock);
     }
 }
