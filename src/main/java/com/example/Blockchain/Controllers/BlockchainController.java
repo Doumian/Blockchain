@@ -3,7 +3,6 @@ package com.example.Blockchain.Controllers;
 import com.example.Blockchain.Entities.BlockEntity;
 import com.example.Blockchain.Services.BlockChainService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

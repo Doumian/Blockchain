@@ -1,9 +1,7 @@
 package com.example.Blockchain.Entities.Transactions;
 
-import com.example.Blockchain.Entities.BlockChainEntity;
-import com.example.Blockchain.Services.Impl.BlockChainServiceImpl;
+import com.example.Blockchain.Singleton.BlockChainSingleton;
 import com.example.Blockchain.Utils.StringUtils;
-import org.springframework.cglib.core.Block;
 
 import java.security.*;
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ public class TransactionEntity {
     public byte[] signature; // this is to prevent anybody else from spending funds in our wallet.
 
     public ArrayList<TransactionInputEntity> inputs = new ArrayList<TransactionInputEntity>();
-    public ArrayList<TransactionOutputEntity> outputs = new ArrayList<TransactionOutputEntity>();
+    public ArrayList<TransactionOutputEntity> outputs = new ArrayList<>();
 
     private static int sequence = 0; // a rough count of how many transactions have been generated.
 
@@ -42,18 +40,18 @@ public class TransactionEntity {
     //Returns true if new transaction could be created.
     public boolean processTransaction() {
 
-        if(verifiySignature() == false) {
+        if(!verifiySignature()) {
             System.out.println("#Transaction Signature failed to verify");
             return false;
         }
 
         //gather transaction inputs (Make sure they are unspent):
         for(TransactionInputEntity i : inputs) {
-            i.UTXO = BlockChainEntity.UTXOs.get(i.transactionOutputId);
+            i.UTXO = BlockChainSingleton.getUTXOs().get(i.transactionOutputId);
         }
 
         //check if transaction is valid:
-        if(getInputsValue() < BlockChainEntity.minimumTransaction) {
+        if(getInputsValue() < BlockChainSingleton.getMinimumTransaction()) {
             System.out.println("#Transaction Inputs to small: " + getInputsValue());
             return false;
         }
@@ -66,13 +64,13 @@ public class TransactionEntity {
 
         //add outputs to Unspent list
         for(TransactionOutputEntity o : outputs) {
-            BlockChainEntity.UTXOs.put(o.id , o);
+            BlockChainSingleton.getUTXOs().put(o.id , o);
         }
 
         //remove transaction inputs from UTXO lists as spent:
         for(TransactionInputEntity i : inputs) {
             if(i.UTXO == null) continue; //if Transaction can't be found skip it
-            BlockChainEntity.UTXOs.remove(i.UTXO.id);
+            BlockChainSingleton.getUTXOs().remove(i.UTXO.id);
         }
 
         return true;
