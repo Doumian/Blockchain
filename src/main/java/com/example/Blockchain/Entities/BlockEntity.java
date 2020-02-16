@@ -2,6 +2,7 @@ package com.example.Blockchain.Entities;
 
 import com.example.Blockchain.Entities.Transactions.TransactionEntity;
 import com.example.Blockchain.Utils.StringUtils;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +12,7 @@ public class BlockEntity {
     public String hash;
     public String previousHash;
     public String merkleRoot;
+    @JsonBackReference //Infinite recursion
     public ArrayList<TransactionEntity> transactions = new ArrayList<TransactionEntity>(); //our data will be a simple message.
     public long timeStamp; //as number of milliseconds since 1/1/1970.
     public int nonce;
@@ -25,13 +27,12 @@ public class BlockEntity {
 
     //Calculate new hash based on blocks contents
     public String calculateHash() {
-        String calculatedhash = StringUtils.applySha256(
+        return StringUtils.applySha256(
                 previousHash +
                         Long.toString(timeStamp) +
                         Integer.toString(nonce) +
                         merkleRoot
         );
-        return calculatedhash;
     }
 
     //Increases nonce value until hash target is reached.

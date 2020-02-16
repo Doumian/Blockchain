@@ -65,24 +65,29 @@ public class BlockChainSingleton {
         BlockEntity blockEntity = new BlockEntity(blockchain.get(blockchain.size()-1).hash);
         blockEntity.mineBlock(difficulty);
         blockEntity.addTransaction(walletA.sendFunds(walletB.publicKey,1000f));
-        blockchain.add(blockEntity);
-        if (blockchain.size()>1) isChainValid();
+        addBlock(blockEntity);
         return blockEntity;
     }
     public static void createGenesisBlock(){
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider()); //Setup Bouncey castle as a Security Provider
+        BlockEntity genesisBlock = new BlockEntity("0");
+
+        genesisBlock.addTransaction(createGenesisTransaction());
+        addBlock(genesisBlock);
+    }
+
+    private static TransactionEntity createGenesisTransaction() {
+        WalletEntity coinbase = new WalletEntity();
         walletA = new WalletEntity();
         walletB = new WalletEntity();
-        BlockEntity genesisBlock = new BlockEntity("0");
-        WalletEntity coinbase = new WalletEntity();
         genesisTransaction = new TransactionEntity(coinbase.publicKey, walletA.publicKey, 100f, null);
         genesisTransaction.generateSignature(coinbase.privateKey);	 //manually sign the genesis transaction
         genesisTransaction.transactionId = "0"; //manually set the transaction id
         genesisTransaction.outputs.add(new TransactionOutputEntity(genesisTransaction.reciepient, genesisTransaction.value, genesisTransaction.transactionId)); //manually add the Transactions Output
         UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0)); //its important to store our first transaction in the UTXOs list.
-        genesisBlock.addTransaction(genesisTransaction);
-        blockchain.add(genesisBlock);
+        return genesisTransaction;
     }
+
     public Boolean isChainValid() {
         BlockEntity currentBlock;
         BlockEntity previousBlock;
@@ -160,4 +165,11 @@ public class BlockChainSingleton {
         System.out.println("Blockchain is valid");
         return true;
     }
+
+    public static void addBlock(BlockEntity newBlock) {
+        newBlock.mineBlock(difficulty);
+        blockchain.add(newBlock);
+    }
+
+
 }
