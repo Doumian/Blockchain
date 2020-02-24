@@ -17,8 +17,8 @@ class BlockchainController {
 
     @GetMapping(value = "/newBlock")
     public BlockEntity
-     generateNewBlock(@RequestParam String hash){
-        return this.blockChainService.generateNewBlock(hash);
+     generateNewBlock(){
+        return this.blockChainService.generateNewBlock();
     }
 
     @GetMapping(value = "/size")

@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class BlockChainSingleton {
 
     private static BlockChainSingleton blockChainSingleton;
-    private static  ArrayList<BlockEntity> blockchain = new ArrayList<>();
+    private volatile static  ArrayList<BlockEntity> blockchain = new ArrayList<>();
     private static  HashMap<String, TransactionOutputEntity> UTXOs = new HashMap<>();
 
     private static  int difficulty = 3;
@@ -63,8 +63,8 @@ public class BlockChainSingleton {
     }
     public synchronized BlockEntity createNewBlock(){
         BlockEntity blockEntity = new BlockEntity(blockchain.get(blockchain.size()-1).hash);
-        blockEntity.mineBlock(difficulty);
         blockEntity.addTransaction(walletA.sendFunds(walletB.publicKey,1000f));
+        blockEntity.mineBlock(difficulty);
         addBlock(blockEntity);
         isChainValid();
         return blockEntity;
@@ -80,7 +80,7 @@ public class BlockChainSingleton {
         WalletEntity coinbase = new WalletEntity();
         walletA = new WalletEntity();
         walletB = new WalletEntity();
-        genesisTransaction = new TransactionEntity(coinbase.publicKey, walletA.publicKey, 100f, null);
+        genesisTransaction = new TransactionEntity(coinbase.publicKey, walletA.publicKey, 100000f, null);
         genesisTransaction.generateSignature(coinbase.privateKey);	 //manually sign the genesis transaction
         genesisTransaction.transactionId = "0"; //manually set the transaction id
         genesisTransaction.outputs.add(new TransactionOutputEntity(genesisTransaction.reciepient, genesisTransaction.value, genesisTransaction.transactionId)); //manually add the Transactions Output

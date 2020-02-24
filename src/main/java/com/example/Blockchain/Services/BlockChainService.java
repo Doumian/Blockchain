@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @Service
 public interface BlockChainService {
-    BlockEntity generateNewBlock(String hash);
+    BlockEntity generateNewBlock();
 
     Integer getBlockchainSize();
 

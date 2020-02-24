@@ -13,7 +13,7 @@ public class BlockChainServiceImpl implements BlockChainService {
     BlockChainSingleton blockchainInstance = BlockChainSingleton.getInstance();
 
     @Override
-    public BlockEntity generateNewBlock(String hash) {
+    public BlockEntity generateNewBlock() {
 
         return blockchainInstance.createNewBlock();
 
