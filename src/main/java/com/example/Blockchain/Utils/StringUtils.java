@@ -8,9 +8,9 @@ import java.util.Base64;
 
 public class StringUtils {
     //Applies Sha256 to a string and returns the result.
-    public static String applySha256(String input){
+    public static String applySha512(String input){
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
             //Applies sha256 to our input,
             byte[] hash = digest.digest(input.getBytes("UTF-8"));
             StringBuffer hexString = new StringBuffer(); // This will contain hash as hexidecimal
@@ -63,7 +63,7 @@ public class StringUtils {
         while(count > 1) {
             treeLayer = new ArrayList<String>();
             for(int i=1; i < previousTreeLayer.size(); i++) {
-                treeLayer.add(applySha256(previousTreeLayer.get(i-1) + previousTreeLayer.get(i)));
+                treeLayer.add(applySha512(previousTreeLayer.get(i-1) + previousTreeLayer.get(i)));
             }
             count = treeLayer.size();
             previousTreeLayer = treeLayer;

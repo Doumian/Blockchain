@@ -27,7 +27,7 @@ public class BlockEntity {
 
     //Calculate new hash based on blocks contents
     public String calculateHash() {
-        return StringUtils.applySha256(
+        return StringUtils.applySha512(
                 previousHash +
                         Long.toString(timeStamp) +
                         Integer.toString(nonce) +

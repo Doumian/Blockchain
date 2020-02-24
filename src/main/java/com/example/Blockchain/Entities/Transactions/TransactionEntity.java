@@ -30,7 +30,7 @@ public class TransactionEntity {
     // This Calculates the transaction hash (which will be used as its Id)
     private String calulateHash() {
         sequence++; //increase the sequence to avoid 2 identical transactions having the same hash
-        return StringUtils.applySha256(
+        return StringUtils.applySha512(
                 StringUtils.getStringFromKey(sender) +
                         StringUtils.getStringFromKey(reciepient) +
                         Float.toString(value) + sequence

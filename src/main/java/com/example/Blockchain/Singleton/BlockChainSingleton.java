@@ -66,12 +66,12 @@ public class BlockChainSingleton {
         blockEntity.mineBlock(difficulty);
         blockEntity.addTransaction(walletA.sendFunds(walletB.publicKey,1000f));
         addBlock(blockEntity);
+        isChainValid();
         return blockEntity;
     }
     public static void createGenesisBlock(){
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider()); //Setup Bouncey castle as a Security Provider
         BlockEntity genesisBlock = new BlockEntity("0");
-
         genesisBlock.addTransaction(createGenesisTransaction());
         addBlock(genesisBlock);
     }

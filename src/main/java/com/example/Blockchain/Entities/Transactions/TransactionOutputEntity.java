@@ -15,7 +15,7 @@ public class TransactionOutputEntity {
         this.reciepient = reciepient;
         this.value = value;
         this.parentTransactionId = parentTransactionId;
-        this.id = StringUtils.applySha256(StringUtils.getStringFromKey(reciepient)+Float.toString(value)+parentTransactionId);
+        this.id = StringUtils.applySha512(StringUtils.getStringFromKey(reciepient)+Float.toString(value)+parentTransactionId);
     }
 
     //Check if coin belongs to you
