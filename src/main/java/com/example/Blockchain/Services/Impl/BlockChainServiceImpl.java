@@ -1,6 +1,7 @@
 package com.example.Blockchain.Services.Impl;
 
 import com.example.Blockchain.Entities.BlockEntity;
+import com.example.Blockchain.Exceptions.BlockOutOfBoundsException;
 import com.example.Blockchain.Services.BlockChainService;
 import com.example.Blockchain.Singleton.BlockChainSingleton;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,13 @@ public class BlockChainServiceImpl implements BlockChainService {
 
     @Override
     public BlockEntity getBlockData(Integer position) {
-        return blockchainInstance.getBlockchain().get(position);
-    }
+        try{
+            return blockchainInstance.getBlockchain().get(position);
+        }
+        catch (IndexOutOfBoundsException ex){
+            throw new BlockOutOfBoundsException("There is no existing block in position: " + position);
+        }
+      }
 
 
 }

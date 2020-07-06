@@ -3,6 +3,8 @@ package com.example.Blockchain.Controllers;
 import com.example.Blockchain.Entities.BlockEntity;
 import com.example.Blockchain.Services.BlockChainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -32,8 +34,10 @@ class BlockchainController {
     }
 
     @GetMapping(value = "/getBlockData")
-    public BlockEntity getBlockData(Integer position){
-        return this.blockChainService.getBlockData(position);
+    public BlockEntity getBlockData(Integer position) {
+
+           return blockChainService.getBlockData(position);
+
     }
 
 
