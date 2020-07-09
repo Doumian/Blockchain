@@ -1,6 +1,7 @@
 package com.example.Blockchain.Services.Impl;
 
 import com.example.Blockchain.Entities.BlockEntity;
+import com.example.Blockchain.Entities.UserEntity;
 import com.example.Blockchain.Exceptions.BlockOutOfBoundsException;
 import com.example.Blockchain.Services.BlockChainService;
 import com.example.Blockchain.Singleton.BlockChainSingleton;
@@ -14,9 +15,9 @@ public class BlockChainServiceImpl implements BlockChainService {
     BlockChainSingleton blockchainInstance = BlockChainSingleton.getInstance();
 
     @Override
-    public BlockEntity generateNewBlock() {
+    public BlockEntity generateNewBlock(UserEntity userA, UserEntity userB, Float value) {
 
-        return blockchainInstance.createNewBlock();
+        return blockchainInstance.createNewBlock(userA, userB, value);
 
     }
 

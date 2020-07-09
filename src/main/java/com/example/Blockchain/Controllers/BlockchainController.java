@@ -1,10 +1,9 @@
 package com.example.Blockchain.Controllers;
 
+import com.example.Blockchain.DTOs.UsersTransactionWrapperDTO;
 import com.example.Blockchain.Entities.BlockEntity;
 import com.example.Blockchain.Services.BlockChainService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,10 +16,10 @@ class BlockchainController {
     @Autowired
     BlockChainService blockChainService;
 
-    @GetMapping(value = "/newBlock")
+    @PostMapping(value = "/newBlock")
     public BlockEntity
-     generateNewBlock(){
-        return this.blockChainService.generateNewBlock();
+     generateNewBlock(@RequestBody UsersTransactionWrapperDTO wrapper){
+        return this.blockChainService.generateNewBlock(wrapper.getUserA(), wrapper.getUserB(), wrapper.getValue());
     }
 
     @GetMapping(value = "/size")

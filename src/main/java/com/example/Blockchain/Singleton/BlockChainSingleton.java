@@ -4,7 +4,9 @@ import com.example.Blockchain.Entities.BlockEntity;
 import com.example.Blockchain.Entities.Transactions.TransactionEntity;
 import com.example.Blockchain.Entities.Transactions.TransactionInputEntity;
 import com.example.Blockchain.Entities.Transactions.TransactionOutputEntity;
+import com.example.Blockchain.Entities.UserEntity;
 import com.example.Blockchain.Entities.WalletEntity;
+
 
 import java.security.Security;
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ public class BlockChainSingleton {
     private static  WalletEntity walletA;
     private static  WalletEntity walletB;
     private static  TransactionEntity genesisTransaction;
+    private static UserEntity genesisUserA;
+    private static UserEntity genesisUserB;
 
     private BlockChainSingleton() {
         createGenesisBlock();
@@ -50,20 +54,14 @@ public class BlockChainSingleton {
         return minimumTransaction;
     }
 
-    public static WalletEntity getWalletA() {
-        return walletA;
-    }
 
-    public static WalletEntity getWalletB() {
-        return walletB;
-    }
 
     public ArrayList<BlockEntity> getBlockchain() {
         return blockchain;
     }
-    public synchronized BlockEntity createNewBlock(){
+    public synchronized BlockEntity createNewBlock(UserEntity userA, UserEntity userB, Float value){
         BlockEntity blockEntity = new BlockEntity(blockchain.get(blockchain.size()-1).hash);
-        blockEntity.addTransaction(walletA.sendFunds(walletB.publicKey,1000f));
+        blockEntity.addTransaction(userA.getWallet().sendFunds(userB.getWallet().publicKey,value));
         blockEntity.mineBlock(difficulty);
         addBlock(blockEntity);
         isChainValid();
@@ -78,14 +76,22 @@ public class BlockChainSingleton {
 
     private static TransactionEntity createGenesisTransaction() {
         WalletEntity coinbase = new WalletEntity();
-        walletA = new WalletEntity();
-        walletB = new WalletEntity();
-        genesisTransaction = new TransactionEntity(coinbase.publicKey, walletA.publicKey, 100000f, null);
+        createGenesisUserS();
+        genesisTransaction = new TransactionEntity(coinbase.publicKey, genesisUserA.getWallet().publicKey, 100000f, null);
         genesisTransaction.generateSignature(coinbase.privateKey);	 //manually sign the genesis transaction
         genesisTransaction.transactionId = "0"; //manually set the transaction id
         genesisTransaction.outputs.add(new TransactionOutputEntity(genesisTransaction.reciepient, genesisTransaction.value, genesisTransaction.transactionId)); //manually add the Transactions Output
         UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0)); //its important to store our first transaction in the UTXOs list.
         return genesisTransaction;
+    }
+
+    private static void createGenesisUserS(){
+        walletA = new WalletEntity();
+        walletB = new WalletEntity();
+        genesisUserA = new UserEntity("David","Larena");
+        genesisUserB = new UserEntity("Daniel","Gonzalez");
+        genesisUserA.setWallet(walletA);
+        genesisUserB.setWallet(walletB);
     }
 
     public Boolean isChainValid() {
@@ -166,7 +172,7 @@ public class BlockChainSingleton {
         return true;
     }
 
-    public static void addBlock(BlockEntity newBlock) {
+    public synchronized static void addBlock(BlockEntity newBlock) {
         newBlock.mineBlock(difficulty);
         blockchain.add(newBlock);
     }

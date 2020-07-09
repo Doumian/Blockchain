@@ -7,10 +7,10 @@ public class UserEntity {
     private WalletEntity wallet;
 
 
-    public UserEntity(String name, String lastName, WalletEntity wallet) {
+    public UserEntity(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
-        this.wallet = wallet;
+        this.wallet = new WalletEntity();
     }
 
     public String getName() {
