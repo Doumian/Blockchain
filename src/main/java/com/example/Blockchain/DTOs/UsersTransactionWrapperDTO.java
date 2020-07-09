@@ -3,19 +3,18 @@ package com.example.Blockchain.DTOs;
 import com.example.Blockchain.Entities.UserEntity;
 
 public class UsersTransactionWrapperDTO {
-    UserEntity UserAObject;
-    UserEntity UserBObject;
+    UserEntity UserA;
+    UserEntity UserB;
     private Float value;
-
 
     // Getter Methods
 
     public UserEntity getUserA() {
-        return UserAObject;
+        return UserA;
     }
 
     public UserEntity getUserB() {
-        return UserBObject;
+        return UserB;
     }
 
     public Float getValue() {
@@ -25,11 +24,11 @@ public class UsersTransactionWrapperDTO {
     // Setter Methods
 
     public void setUserA(UserEntity userAObject) {
-        this.UserAObject = userAObject;
+        this.UserA = userAObject;
     }
 
     public void setUserB(UserEntity userBObject) {
-        this.UserBObject = userBObject;
+        this.UserB = userBObject;
     }
 
     public void setValue(Float value) {
