@@ -10,8 +10,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/blockchain")
-public
-class BlockchainController {
+public class BlockchainController {
 
     @Autowired
     BlockChainService blockChainService;

@@ -6,6 +6,9 @@ import com.example.Blockchain.Entities.Transactions.TransactionInputEntity;
 import com.example.Blockchain.Entities.Transactions.TransactionOutputEntity;
 import com.example.Blockchain.Entities.UserEntity;
 import com.example.Blockchain.Entities.WalletEntity;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoDatabase;
 
 
 import java.security.Security;
@@ -18,6 +21,8 @@ public class BlockChainSingleton {
     private volatile static  ArrayList<BlockEntity> blockchain = new ArrayList<>();
     private static  HashMap<String, TransactionOutputEntity> UTXOs = new HashMap<>();
 
+
+
     private static  int difficulty = 3;
     private static  float minimumTransaction = 0.1f;
     private static  WalletEntity walletA;
@@ -27,7 +32,9 @@ public class BlockChainSingleton {
     private static UserEntity genesisUserB;
 
     private BlockChainSingleton() {
+
         createGenesisBlock();
+
     }
 
     // Only one thread can execute this at a time
@@ -176,6 +183,7 @@ public class BlockChainSingleton {
         newBlock.mineBlock(difficulty);
         blockchain.add(newBlock);
     }
+
 
 
 }

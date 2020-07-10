@@ -1,9 +1,13 @@
 package com.example.Blockchain.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class UserEntity {
 
     private String name;
+
     private String lastName;
+    @JsonIgnore
     private WalletEntity wallet;
 
 
@@ -12,6 +16,7 @@ public class UserEntity {
         this.lastName = lastName;
         this.wallet = new WalletEntity();
     }
+
 
     public String getName() {
         return name;

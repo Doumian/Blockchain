@@ -4,6 +4,7 @@ import com.example.Blockchain.Entities.Transactions.TransactionEntity;
 import com.example.Blockchain.Entities.Transactions.TransactionInputEntity;
 import com.example.Blockchain.Entities.Transactions.TransactionOutputEntity;
 import com.example.Blockchain.Singleton.BlockChainSingleton;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
