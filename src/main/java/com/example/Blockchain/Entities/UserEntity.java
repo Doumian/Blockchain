@@ -1,12 +1,26 @@
 package com.example.Blockchain.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+
+@Document(collection = "users")
+@JsonPropertyOrder({"id", "name", "lastName"})
 public class UserEntity {
 
+    @Id
+    @NotNull
+    private Integer id;
+
+    @NotNull
     private String name;
 
+    @NotNull
     private String lastName;
+    
     @JsonIgnore
     private WalletEntity wallet;
 
