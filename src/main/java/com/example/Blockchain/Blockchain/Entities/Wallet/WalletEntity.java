@@ -1,10 +1,9 @@
-package com.example.Blockchain.Entities;
+package com.example.Blockchain.Blockchain.Entities.Wallet;
 
-import com.example.Blockchain.Entities.Transactions.TransactionEntity;
-import com.example.Blockchain.Entities.Transactions.TransactionInputEntity;
-import com.example.Blockchain.Entities.Transactions.TransactionOutputEntity;
-import com.example.Blockchain.Singleton.BlockChainSingleton;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.Blockchain.Blockchain.Entities.Transactions.TransactionEntity;
+import com.example.Blockchain.Blockchain.Entities.Transactions.TransactionInputEntity;
+import com.example.Blockchain.Blockchain.Entities.Transactions.TransactionOutputEntity;
+import com.example.Blockchain.Blockchain.BlockChainSingleton;
 
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;

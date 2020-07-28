@@ -1,7 +1,7 @@
-package com.example.Blockchain.Services;
+package com.example.Blockchain.Blockchain.Service;
 
-import com.example.Blockchain.Entities.BlockEntity;
-import com.example.Blockchain.Entities.UserEntity;
+import com.example.Blockchain.Blockchain.Entities.BlockEntity;
+import com.example.Blockchain.Users.Entities.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

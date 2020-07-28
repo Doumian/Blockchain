@@ -1,6 +1,6 @@
-package com.example.Blockchain.Utils;
+package com.example.Blockchain.General.Utils;
 
-import com.example.Blockchain.Entities.Transactions.TransactionEntity;
+import com.example.Blockchain.Blockchain.Entities.Transactions.TransactionEntity;
 
 import java.security.*;
 import java.util.ArrayList;

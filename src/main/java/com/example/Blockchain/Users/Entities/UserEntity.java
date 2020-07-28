@@ -1,5 +1,6 @@
-package com.example.Blockchain.Entities;
+package com.example.Blockchain.Users.Entities;
 
+import com.example.Blockchain.Blockchain.Entities.Wallet.WalletEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.data.annotation.Id;

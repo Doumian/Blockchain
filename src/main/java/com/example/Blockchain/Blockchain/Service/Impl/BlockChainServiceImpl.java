@@ -1,10 +1,10 @@
-package com.example.Blockchain.Services.Impl;
+package com.example.Blockchain.Blockchain.Service.Impl;
 
-import com.example.Blockchain.Entities.BlockEntity;
-import com.example.Blockchain.Entities.UserEntity;
-import com.example.Blockchain.Exceptions.BlockOutOfBoundsException;
-import com.example.Blockchain.Services.BlockChainService;
-import com.example.Blockchain.Singleton.BlockChainSingleton;
+import com.example.Blockchain.Blockchain.BlockChainSingleton;
+import com.example.Blockchain.Blockchain.Exceptions.BlockOutOfBoundsException;
+import com.example.Blockchain.Blockchain.Entities.BlockEntity;
+import com.example.Blockchain.Blockchain.Service.BlockChainService;
+import com.example.Blockchain.Users.Entities.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

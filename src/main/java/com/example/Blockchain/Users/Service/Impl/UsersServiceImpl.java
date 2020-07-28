@@ -1,8 +1,8 @@
-package com.example.Blockchain.Services.Impl;
+package com.example.Blockchain.Users.Service.Impl;
 
-import com.example.Blockchain.Entities.UserEntity;
+import com.example.Blockchain.Users.Service.UsersService;
+import com.example.Blockchain.Users.Entities.UserEntity;
 import com.example.Blockchain.MongoDB.JavaMongoDBConnection;
-import com.example.Blockchain.Services.BlockChainUsersService;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -17,7 +17,7 @@ import static com.mongodb.client.model.Indexes.ascending;
 import static java.util.stream.IntStream.iterate;
 
 @Service
-public class BlockChainUsersServiceImpl implements BlockChainUsersService {
+public class UsersServiceImpl implements UsersService {
 
     private static final AtomicInteger count = new AtomicInteger(getLastCustomId());
 

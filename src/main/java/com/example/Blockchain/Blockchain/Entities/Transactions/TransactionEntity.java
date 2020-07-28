@@ -1,7 +1,7 @@
-package com.example.Blockchain.Entities.Transactions;
+package com.example.Blockchain.Blockchain.Entities.Transactions;
 
-import com.example.Blockchain.Singleton.BlockChainSingleton;
-import com.example.Blockchain.Utils.StringUtils;
+import com.example.Blockchain.Blockchain.BlockChainSingleton;
+import com.example.Blockchain.General.Utils.StringUtils;
 
 import java.security.*;
 import java.util.ArrayList;

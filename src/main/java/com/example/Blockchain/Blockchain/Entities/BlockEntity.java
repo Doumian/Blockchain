@@ -1,7 +1,7 @@
-package com.example.Blockchain.Entities;
+package com.example.Blockchain.Blockchain.Entities;
 
-import com.example.Blockchain.Entities.Transactions.TransactionEntity;
-import com.example.Blockchain.Utils.StringUtils;
+import com.example.Blockchain.Blockchain.Entities.Transactions.TransactionEntity;
+import com.example.Blockchain.General.Utils.StringUtils;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.ArrayList;
@@ -12,8 +12,10 @@ public class BlockEntity {
     public String hash;
     public String previousHash;
     public String merkleRoot;
+
     @JsonBackReference //Infinite recursion
     public ArrayList<TransactionEntity> transactions = new ArrayList<TransactionEntity>(); //our data will be a simple message.
+
     public long timeStamp; //as number of milliseconds since 1/1/1970.
     public int nonce;
 

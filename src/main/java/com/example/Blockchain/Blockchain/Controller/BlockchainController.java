@@ -1,8 +1,8 @@
-package com.example.Blockchain.Controllers;
+package com.example.Blockchain.Blockchain.Controller;
 
-import com.example.Blockchain.DTOs.UsersTransactionWrapperDTO;
-import com.example.Blockchain.Entities.BlockEntity;
-import com.example.Blockchain.Services.BlockChainService;
+import com.example.Blockchain.Blockchain.Service.BlockChainService;
+import com.example.Blockchain.Blockchain.Entities.BlockEntity;
+import com.example.Blockchain.Users.DTO.UsersTransactionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ public class BlockchainController {
 
     @PostMapping(value = "/newBlock")
     public BlockEntity
-     generateNewBlock(@RequestBody UsersTransactionWrapperDTO wrapper){
+     generateNewBlock(@RequestBody UsersTransactionDTO wrapper){
         return this.blockChainService.generateNewBlock(wrapper.getUserA(), wrapper.getUserB(), wrapper.getValue());
     }
 

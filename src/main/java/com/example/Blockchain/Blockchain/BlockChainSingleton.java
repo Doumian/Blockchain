@@ -1,14 +1,11 @@
-package com.example.Blockchain.Singleton;
+package com.example.Blockchain.Blockchain;
 
-import com.example.Blockchain.Entities.BlockEntity;
-import com.example.Blockchain.Entities.Transactions.TransactionEntity;
-import com.example.Blockchain.Entities.Transactions.TransactionInputEntity;
-import com.example.Blockchain.Entities.Transactions.TransactionOutputEntity;
-import com.example.Blockchain.Entities.UserEntity;
-import com.example.Blockchain.Entities.WalletEntity;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoDatabase;
+import com.example.Blockchain.Blockchain.Entities.BlockEntity;
+import com.example.Blockchain.Blockchain.Entities.Transactions.TransactionEntity;
+import com.example.Blockchain.Blockchain.Entities.Transactions.TransactionInputEntity;
+import com.example.Blockchain.Blockchain.Entities.Transactions.TransactionOutputEntity;
+import com.example.Blockchain.Users.Entities.UserEntity;
+import com.example.Blockchain.Blockchain.Entities.Wallet.WalletEntity;
 
 
 import java.security.Security;
@@ -20,8 +17,6 @@ public class BlockChainSingleton {
     private static BlockChainSingleton blockChainSingleton;
     private volatile static  ArrayList<BlockEntity> blockchain = new ArrayList<>();
     private static  HashMap<String, TransactionOutputEntity> UTXOs = new HashMap<>();
-
-
 
     private static  int difficulty = 3;
     private static  float minimumTransaction = 0.1f;

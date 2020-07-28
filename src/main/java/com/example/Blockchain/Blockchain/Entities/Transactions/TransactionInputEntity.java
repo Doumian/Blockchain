@@ -1,4 +1,4 @@
-package com.example.Blockchain.Entities.Transactions;
+package com.example.Blockchain.Blockchain.Entities.Transactions;
 
 public class TransactionInputEntity {
     public String transactionOutputId; //Reference to TransactionOutputs -> transactionId

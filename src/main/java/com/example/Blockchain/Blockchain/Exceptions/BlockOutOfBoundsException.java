@@ -1,4 +1,4 @@
-package com.example.Blockchain.Exceptions;
+package com.example.Blockchain.Blockchain.Exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

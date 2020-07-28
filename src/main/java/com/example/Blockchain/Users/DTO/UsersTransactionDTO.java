@@ -1,8 +1,8 @@
-package com.example.Blockchain.DTOs;
+package com.example.Blockchain.Users.DTO;
 
-import com.example.Blockchain.Entities.UserEntity;
+import com.example.Blockchain.Users.Entities.UserEntity;
 
-public class UsersTransactionWrapperDTO {
+public class UsersTransactionDTO {
     UserEntity UserA;
     UserEntity UserB;
     private Float value;
